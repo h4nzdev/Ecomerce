@@ -13,7 +13,9 @@ const Products = ({ product, handleShow, index, showAll }) => {
           <h2 className="font-semibold text-xl flex-1 line-clamp-2 hover:line-clamp-none">
             {product.title}
           </h2>
-          <p className="text-xl font-bold text-green-600 ps-3">$ {product.price}</p>
+          <p className="text-xl font-bold text-green-600 ps-3">
+            $ {product.price}
+          </p>
         </div>
         <ProductDescription
           handleShow={handleShow}
@@ -22,7 +24,10 @@ const Products = ({ product, handleShow, index, showAll }) => {
           product={product}
         />
       </div>
-      <div className="flex items-center gap-4 mt-10">
+      <div className="flex items-center justify-center p-1 rounded-xl gap-1 mt-2 border min-w-30 max-w-35">
+        <p className="text-slate-500">{product.category}</p>
+      </div>
+      <div className="flex items-center gap-4 mt-6">
         <ProductButton />
       </div>
     </div>
