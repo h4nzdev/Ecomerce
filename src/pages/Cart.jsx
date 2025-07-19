@@ -2,9 +2,22 @@ import React from "react";
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import Swal from "sweetalert2";
 
 const Cart = () => {
-  const { cartItems, updateQuantity, removeFromCart } = useCart();
+  const { cartItems, updateQuantity, removeFromCart, clearCart } = useCart();
+
+  const checkOut = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Purchased!",
+      text: "You successfully purchased the items.",
+      timer: 1500,
+      showConfirmButton: false,
+    }).then(() => {
+      clearCart(); // Clear the cart after the alert is closed
+    });
+  };
 
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -45,7 +58,7 @@ const Cart = () => {
                   {cartItems.map((item) => (
                     <div
                       key={item.id}
-                      className="flex items-center space-x-4 pb-6 border-b border-slate-100 last:border-b-0 last:pb-0"
+                      className="flex md:flex-row flex-col md:gap-0 gap-2 md:items-center space-x-4 pb-6 border-b border-slate-500/50 last:border-b-0 last:pb-0"
                     >
                       <div className="w-20 h-20 bg-slate-200 rounded-lg flex items-center justify-center">
                         <img
@@ -87,7 +100,7 @@ const Cart = () => {
                         </button>
                       </div>
 
-                      <div className="text-right">
+                      <div className="md:text-right">
                         <p className="font-medium text-slate-800">
                           ${(item.price * item.quantity).toFixed(2)}
                         </p>
@@ -138,7 +151,10 @@ const Cart = () => {
                   </div>
                 </div>
 
-                <button className="w-full py-3 bg-slate-700 text-white rounded-md hover:bg-slate-800 transition-colors font-medium mb-3">
+                <button
+                  onClick={checkOut}
+                  className="w-full py-3 bg-slate-700 text-white rounded-md hover:bg-slate-800 transition-colors font-medium mb-3"
+                >
                   Proceed to Checkout
                 </button>
 

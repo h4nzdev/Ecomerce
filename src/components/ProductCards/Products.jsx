@@ -60,7 +60,7 @@ const Products = ({ product, handleShow, index, showAll }) => {
           product={product}
         />
       </div>
-      <div className="flex items-center justify-center p-1 rounded-xl gap-1 mt-2 border min-w-30 max-w-35">
+      <div className="flex items-center justify-center p-1 rounded-xl gap-1 mt-2 border border-gray-500/50 min-w-30 max-w-35">
         <p className="text-slate-500">{product.category}</p>
       </div>
       <div className="flex items-center gap-4 mt-6">

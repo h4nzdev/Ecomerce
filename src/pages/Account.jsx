@@ -22,8 +22,8 @@ const Account = () => {
               <User className="w-8 h-8 text-slate-600" />
             </div>
             <div>
-              <h2 className="text-xl font-semibold text-slate-800">John Doe</h2>
-              <p className="text-slate-600">Customer since March 2023</p>
+              <h2 className="text-xl font-semibold text-slate-800">Hanz Christian Angelo</h2>
+              <p className="text-slate-600">Customer since March 1199</p>
             </div>
           </div>
 
@@ -33,7 +33,7 @@ const Account = () => {
                 <Mail className="w-5 h-5 text-slate-500 mr-3" />
                 <div>
                   <p className="text-sm text-slate-600">Email</p>
-                  <p className="text-slate-800">john.doe@email.com</p>
+                  <p className="text-slate-800">hanz.dev@email.com</p>
                 </div>
               </div>
 
@@ -52,7 +52,7 @@ const Account = () => {
                 <div>
                   <p className="text-sm text-slate-600">Address</p>
                   <p className="text-slate-800">
-                    123 Main St, City, State 12345
+                    Edison Street Lahug Cebu City
                   </p>
                 </div>
               </div>
