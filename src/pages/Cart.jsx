@@ -1,44 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "Premium Wireless Headphones",
-      price: 199.99,
-      quantity: 1,
-      image: "/api/placeholder/80/80",
-    },
-    {
-      id: 2,
-      name: "Smart Fitness Watch",
-      price: 299.99,
-      quantity: 2,
-      image: "/api/placeholder/80/80",
-    },
-    {
-      id: 3,
-      name: "Bluetooth Speaker",
-      price: 89.99,
-      quantity: 1,
-      image: "/api/placeholder/80/80",
-    },
-  ]);
-
-  const updateQuantity = (id, newQuantity) => {
-    if (newQuantity <= 0) return;
-    setCartItems((items) =>
-      items.map((item) =>
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      )
-    );
-  };
-
-  const removeItem = (id) => {
-    setCartItems((items) => items.filter((item) => item.id !== id));
-  };
+  const { cartItems, updateQuantity, removeFromCart } = useCart();
 
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -58,9 +24,11 @@ const Cart = () => {
           <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-12 text-center">
             <ShoppingBag className="w-16 h-16 text-slate-400 mx-auto mb-4" />
             <p className="text-slate-600 text-lg mb-4">Your cart is empty</p>
-            <button className="px-6 py-3 bg-slate-700 text-white rounded-md hover:bg-slate-800 transition-colors">
-              Continue Shopping
-            </button>
+            <Link to={"/"}>
+              <button className="px-6 py-3 bg-slate-700 text-white rounded-md hover:bg-slate-800 transition-colors">
+                Continue Shopping
+              </button>
+            </Link>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -80,12 +48,15 @@ const Cart = () => {
                       className="flex items-center space-x-4 pb-6 border-b border-slate-100 last:border-b-0 last:pb-0"
                     >
                       <div className="w-20 h-20 bg-slate-200 rounded-lg flex items-center justify-center">
-                        <div className="w-16 h-16 bg-slate-300 rounded"></div>
+                        <img
+                          src={item.image}
+                          className="w-16 h-16 bg-slate-300 rounded"
+                        />
                       </div>
 
                       <div className="flex-1">
                         <h3 className="font-medium text-slate-800 mb-1">
-                          {item.name}
+                          {item.title}
                         </h3>
                         <p className="text-slate-600">
                           ${item.price.toFixed(2)}
@@ -123,7 +94,7 @@ const Cart = () => {
                       </div>
 
                       <button
-                        onClick={() => removeItem(item.id)}
+                        onClick={() => removeFromCart(item.id)}
                         className="text-slate-500 hover:text-red-600 p-1"
                       >
                         <Trash2 className="w-5 h-5" />

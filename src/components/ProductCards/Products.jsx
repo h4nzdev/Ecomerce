@@ -1,7 +1,43 @@
 import React from "react";
 import ProductButton from "./Buttons/ProductButton";
+import ProductImage from "./ProductImage";
+import ProductHeader from "./ProductHeader";
+import { useCart } from "../../context/CartContext";
+import Swal from "sweetalert2";
 
 const Products = ({ product, handleShow, index, showAll }) => {
+  const { cartItems, addToCart } = useCart();
+
+  const handleCart = (id, title, price, image) => {
+    const newCart = {
+      id: id,
+      title: title,
+      price: price,
+      quantity: 1,
+      image: image,
+    };
+
+    const existingItem = cartItems.find((item) => item.id === id);
+
+    if (existingItem) {
+      Swal.fire({
+        icon: "error",
+        title: "This item is already in cart",
+        text: `${title} has not been added.`,
+        timer: 1500,
+        showConfirmButton: false,
+      });
+    } else {
+      addToCart(newCart);
+      Swal.fire({
+        icon: "success",
+        title: "Added to Cart!",
+        text: `${title} has been added.`,
+        timer: 1500,
+        showConfirmButton: false,
+      });
+    }
+  };
   return (
     <div
       key={product.id}
@@ -28,7 +64,13 @@ const Products = ({ product, handleShow, index, showAll }) => {
         <p className="text-slate-500">{product.category}</p>
       </div>
       <div className="flex items-center gap-4 mt-6">
-        <ProductButton />
+        <ProductButton
+          handleCart={handleCart}
+          id={product.id}
+          title={product.title}
+          price={product.price}
+          image={product.image}
+        />
       </div>
     </div>
   );
