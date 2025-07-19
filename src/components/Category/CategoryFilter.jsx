@@ -10,8 +10,8 @@ const iconMap = {
 };
 const CategoryFilter = ({ selected, onFilterChange }) => {
   return (
-    <section className="w-[90%] rounded shadow-lg p-6 flex justify-between items-center">
-      <h2 className="text-2xl font-semibold">
+    <section className="w-[90%] md:mt-0 mt-4 rounded shadow-lg p-6 flex flex-col md:flex-row text-center justify-between items-center">
+      <h2 className="md:text-2xl font-semibold md:mb-0 mb-4">
         Find your favorite products in a lower price
       </h2>
       <div className="flex gap-4">

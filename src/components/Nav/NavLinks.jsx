@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const NavLinks = () => {
   return (
-    <div className="flex items-center gap-8">
+    <div className="flex items-center md:gap-8 gap-2">
       <Link to="/" className="hover:text-blue-300 transition-colors">
         Products
       </Link>
