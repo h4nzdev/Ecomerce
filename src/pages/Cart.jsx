@@ -1,22 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import Swal from "sweetalert2";
+import PaymentModal from "../components/Modal/PaymentModal";
 
 const Cart = () => {
   const { cartItems, updateQuantity, removeFromCart, clearCart } = useCart();
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
   const checkOut = () => {
-    Swal.fire({
-      icon: "success",
-      title: "Purchased!",
-      text: "You successfully purchased the items.",
-      timer: 1500,
-      showConfirmButton: false,
-    }).then(() => {
-      clearCart(); // Clear the cart after the alert is closed
-    });
+    setIsPaymentModalOpen(true);
   };
 
   const subtotal = cartItems.reduce(
@@ -168,6 +162,12 @@ const Cart = () => {
           </div>
         )}
       </div>
+
+      <PaymentModal
+        isOpen={isPaymentModalOpen}
+        onClose={() => setIsPaymentModalOpen(false)}
+        total={total}
+      />
     </div>
   );
 };

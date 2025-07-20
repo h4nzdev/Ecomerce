@@ -1,20 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login, checkAuth } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    // Redirect to home if already logged in
+    if (checkAuth()) {
+      navigate("/");
+    }
+  }, [checkAuth, navigate]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add login logic here
-    console.log("Login attempt with:", email);
-    // Redirect to account page after successful login
-    navigate("/");
+    setLoading(true);
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/login", {
+        email,
+        password,
+      });
+
+      if (response.data.success) {
+        login(response.data.user, rememberMe);
+
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful!",
+          text: "Welcome back!",
+          timer: 1500,
+          showConfirmButton: false,
+        }).then(() => {
+          navigate("/");
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: error.response?.data?.message || "Something went wrong",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -102,20 +142,23 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full bg-slate-700 text-white py-3 px-4 rounded-md hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition-colors font-medium"
+            disabled={loading}
+            className="w-full bg-slate-700 text-white py-3 px-4 rounded-md hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition-colors font-medium disabled:bg-slate-400"
           >
-            Sign In
+            {loading ? "Signing in..." : "Sign In"}
           </button>
 
           <div className="text-center">
             <p className="text-sm text-slate-600">
               Don't have an account?{" "}
-              <button
-                type="button"
-                className="text-slate-700 hover:text-slate-900 font-medium"
-              >
-                Sign up
-              </button>
+              <Link to={"/register"}>
+                <button
+                  type="button"
+                  className="text-slate-700 hover:text-slate-900 font-medium"
+                >
+                  Sign up
+                </button>
+              </Link>
             </p>
           </div>
         </div>
