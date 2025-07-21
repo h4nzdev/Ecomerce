@@ -3,7 +3,12 @@ import { useAuth } from "../../context/AuthContext";
 import { Delete, Trash, X } from "lucide-react";
 import axios from "axios";
 
-const OrderHistory = ({ setOrderNumber, setTotalSpent }) => {
+const OrderHistory = ({
+  setOrderNumber,
+  setTotalSpent,
+  showLimit,
+  setShowLimit,
+}) => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
@@ -77,7 +82,7 @@ const OrderHistory = ({ setOrderNumber, setTotalSpent }) => {
     <div className="p-4">
       <h2 className="text-2xl font-semibold mb-4">Order History</h2>
       <div className="space-y-4">
-        {orders.map((order) => (
+        {orders.slice(0, showLimit).map((order) => (
           <div key={order.id} className="border rounded-lg p-4 shadow-sm">
             <div className="flex justify-between mb-2">
               <div>
@@ -135,6 +140,16 @@ const OrderHistory = ({ setOrderNumber, setTotalSpent }) => {
           </div>
         ))}
       </div>
+      <button
+        onClick={() =>
+          showLimit < orders.length
+            ? setShowLimit(orders.length)
+            : setShowLimit(3)
+        }
+        className="mt-4 text-slate-700 hover:text-slate-900 font-medium"
+      >
+        {showLimit < orders.length ? "View All Orders →" : "Show Less orders →"}
+      </button>
     </div>
   );
 };

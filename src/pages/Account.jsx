@@ -16,9 +16,10 @@ import { useCart } from "../context/CartContext";
 
 const Account = () => {
   const { user } = useAuth();
-  const {cartItems} = useCart();
+  const { cartItems } = useCart();
   const [orderNumber, setOrderNumber] = useState(0);
   const [totalSpent, setTotalSpent] = useState(0);
+  const [showLimit, setShowLimit] = useState(3);
 
   console.log(user);
   return (
@@ -121,7 +122,9 @@ const Account = () => {
             <div className="flex items-center">
               <Settings className="w-8 h-8 text-slate-600 mr-3" />
               <div>
-                <p className="text-2xl font-bold text-slate-800">{cartItems.length}</p>
+                <p className="text-2xl font-bold text-slate-800">
+                  {cartItems.length}
+                </p>
                 <p className="text-sm text-slate-600">Saved Items</p>
               </div>
             </div>
@@ -137,11 +140,9 @@ const Account = () => {
           <OrderHistory
             setOrderNumber={setOrderNumber}
             setTotalSpent={setTotalSpent}
+            showLimit={showLimit}
+            setShowLimit={setShowLimit}
           />
-
-          <button className="mt-4 text-slate-700 hover:text-slate-900 font-medium">
-            View All Orders →
-          </button>
         </div>
       </div>
     </div>

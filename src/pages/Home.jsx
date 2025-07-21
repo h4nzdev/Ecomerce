@@ -4,6 +4,9 @@ import ProductCard from "../components/ProductCards/ProductCard";
 import Loading from "../components/Loading";
 import Nav from "../components/Nav/Nav";
 import CategoryFilter from "../components/Category/CategoryFilter";
+import ChatIcon from "../components/Chatbot/ChatIcon";
+import ChatBot from "../components/Chatbot/ChatBot";
+import { AnimatePresence } from "framer-motion";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -13,6 +16,7 @@ const Home = () => {
   const [index, setIndex] = useState(null);
   const [showAll, setShowAll] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const fetchProducts = async () => {
     try {
@@ -74,6 +78,10 @@ const Home = () => {
           />
         )}
       </div>
+      {!isOpen && <ChatIcon setIsOpen={setIsOpen} isOpen={isOpen} />}
+      <AnimatePresence mode="wait">
+        {isOpen && <ChatBot setIsOpen={setIsOpen} />}
+      </AnimatePresence>
     </div>
   );
 };

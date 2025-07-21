@@ -1,6 +1,9 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import sqlite3
+import google.generativeai as genai
+import json
+from product_data import product_data
 
 app = Flask(__name__)
 CORS(app)
@@ -49,6 +52,43 @@ def db_init() :
     
     conn.commit()
     conn.close()
+    
+GOOGLE_API_KEY = "Your Api Key Here!"
+genai.configure(api_key=GOOGLE_API_KEY)
+
+# Create a Gemini chat model instance
+model = genai.GenerativeModel("gemini-2.0-flash")
+chat_session = model.start_chat(history=[])
+
+@app.route("/api/gemini-chat", methods=["POST"])
+def gemini_chat():
+    data = request.get_json()
+    user_message = data.get("message")
+
+    if not user_message:
+        return jsonify({"reply": "No message received"}), 400
+
+    try:
+        # ✅ Build the custom prompt
+        prompt = f"""
+        You are a shopping assistant. Use the product list below to help the user.
+
+        Product list:
+        {json.dumps(product_data, indent=2)}
+
+        User said: "{user_message}"
+
+        Respond with helpful suggestions or answers using the product data.
+        """
+
+        # ✅ Send to Gemini
+        response = chat_session.send_message(prompt)
+
+        return jsonify({"reply": response.text})
+
+    except Exception as e:
+        print("💥 Gemini Error:", str(e))
+        return jsonify({"reply": f"Error: {str(e)}"}), 500
     
 @app.route("/api/login", methods=['POST'])
 def login_user():

@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProductButton = ({ handleCart, id, title, price, image }) => {
+const ProductButton = ({ handleCart, handleBuy, id, title, price, image }) => {
   return (
     <>
       <button
@@ -9,7 +9,10 @@ const ProductButton = ({ handleCart, id, title, price, image }) => {
       >
         Add to cart
       </button>
-      <button className="w-30 p-2 bg-slate-700 text-white rounded-full cursor-pointer">
+      <button
+        onClick={() => handleBuy(id, title, price, image)}
+        className="w-30 p-2 bg-slate-700 text-white rounded-full cursor-pointer"
+      >
         Buy
       </button>
     </>

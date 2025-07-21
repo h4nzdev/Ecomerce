@@ -4,8 +4,10 @@ import ProductImage from "./ProductImage";
 import ProductHeader from "./ProductHeader";
 import { useCart } from "../../context/CartContext";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Products = ({ product, handleShow, index, showAll }) => {
+  const navigate = useNavigate();
   const { cartItems, addToCart } = useCart();
 
   const handleCart = (id, title, price, image) => {
@@ -38,6 +40,18 @@ const Products = ({ product, handleShow, index, showAll }) => {
       });
     }
   };
+  const handleBuy = (id, title, price, image) => {
+    const newCart = {
+      id: id,
+      title: title,
+      price: price,
+      quantity: 1,
+      image: image,
+    };
+
+    addToCart(newCart);
+    navigate("/cart");
+  };
   return (
     <div
       key={product.id}
@@ -66,6 +80,7 @@ const Products = ({ product, handleShow, index, showAll }) => {
       <div className="flex items-center gap-4 mt-6">
         <ProductButton
           handleCart={handleCart}
+          handleBuy={handleBuy}
           id={product.id}
           title={product.title}
           price={product.price}
