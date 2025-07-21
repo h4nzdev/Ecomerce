@@ -1,133 +1,70 @@
-# Modern E-commerce UI
+# 🛒 Modern E-commerce UI with AI Chatbot
 
-A modern, responsive e-commerce user interface built with React, Tailwind CSS, and Vite. This project demonstrates a clean and user-friendly design for an online shopping experience.
+A modern, responsive e-commerce UI built with **React**, **Tailwind CSS**, and **Vite** — now upgraded with an **AI-powered chatbot** to help users explore products, get order details, and more!
 
 ![Project Preview](./src/assets/react.svg)
 
-## Features
+---
 
-- 🏠 **Home Page**
-  - Product grid layout
-  - Category filtering system
-  - Product cards with image and details
-  - Loading states and error handling
+## ✨ New Feature: AI Chatbot
 
-- 🛒 **Shopping Cart**
-  - Clean and organized cart interface
-  - Product quantity management
-  - Cart total calculation
+Our latest update adds a smart chatbot powered by **Google Gemini AI** that supports:
 
-- 👤 **User Account Dashboard**
-  - Profile information display
-  - Order history tracking
-  - Quick stats overview (Total Orders, Total Spent, Saved Items)
-  - Payment method management
-  - Shipping address management
+- 🧠 Product questions (pricing, availability, etc.)
+- 📦 Viewing user’s **order history** after login
+- 🔍 Help with product search and filtering
+- 🛒 Guidance during shopping or checkout
+- 🧾 General store assistance (FAQs, returns, shipping, etc.)
 
-- 🔐 **Authentication**
-  - User-friendly login interface
-  - Form validation
-  - Secure authentication flow
-
-## Technologies Used
-
-- ⚛️ **React** - Frontend library
-- 🚦 **React Router** - Navigation and routing
-- 🎨 **Tailwind CSS** - Styling and design
-- ⚡ **Vite** - Build tool
-- 📦 **Axios** - API requests
-- 🎯 **Lucide React** - Icon system
-
-## Project Structure
-
-```
-src/
-├── components/
-│   ├── Nav/
-│   │   ├── Nav.jsx
-│   │   └── NavLinks.jsx
-│   ├── ProductCards/
-│   │   ├── ProductCard.jsx
-│   │   └── Products.jsx
-│   ├── Category/
-│   │   └── CategoryFilter.jsx
-│   └── Loading.jsx
-├── pages/
-│   ├── Home.jsx
-│   ├── Cart.jsx
-│   ├── Account.jsx
-│   └── Login.jsx
-└── assets/
-```
-
-## Getting Started
-
-1. Clone the repository:
-```bash
-git clone https://github.com/h4nzdev/Ecomerce.git
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Start the development server:
-```bash
-npm run dev
-```
-
-## Features Showcase
-
-### Home Page
-- Responsive product grid
-- Category-based filtering
-- Clean and modern UI
-- Loading states for better UX
-
-### Account Dashboard
-- User profile overview
-- Order history with status tracking
-- Purchase statistics
-- Saved payment methods
-- Shipping information
-
-### Shopping Cart
-- Product list with details
-- Quantity adjustments
-- Total calculation
-- Checkout process
-
-## Design Philosophy
-
-The UI is built with a focus on:
-- Clean and minimal design
-- Consistent spacing and typography
-- Responsive layout for all screen sizes
-- User-friendly interactions
-- Clear visual hierarchy
-
-## API Integration
-
-The project uses the Fake Store API (https://fakestoreapi.com) for product data, demonstrating:
-- Product fetching
-- Category filtering
-- Error handling
-- Loading states
-
-## Contributing
-
-Feel free to contribute to this project by:
-1. Forking the repository
-2. Creating your feature branch
-3. Committing your changes
-4. Pushing to the branch
-5. Creating a new Pull Request
-
-## License
-
-This project is open source and available under the MIT License.
+> Accessible from every page – always ready to help!
 
 ---
 
-Created with 💙 by [h4nzdev](https://github.com/h4nzdev)
+## ⚙️ Features
+
+### 🏠 Home Page
+- Product grid layout
+- Category filtering
+- Product cards with image and details
+- Loading and error handling
+
+### 🛒 Shopping Cart
+- Quantity management
+- Total calculation
+- Checkout ready
+
+### 👤 User Dashboard
+- Profile info display
+- **Order history**
+- Total Orders, Total Spent
+- Payment & shipping management
+
+### 🔐 Authentication
+- Sign in / Sign up
+- Form validation
+- Secure token-based login
+
+### 🤖 Chatbot Assistant
+- Supports all products
+- Personalized help after login
+- Works with order history and filters
+- Fun, friendly, and fast!
+
+---
+
+## 🧰 Technologies Used
+
+- ⚛️ React – Frontend
+- 🎨 Tailwind CSS – Styling
+- ⚡ Vite – Dev tool
+- 🚦 React Router – Navigation
+- 📦 Axios – API requests
+- 💬 Google Gemini API – Chatbot
+- 🖼️ Lucide Icons – UI Icons
+- 🐍 Flask – Backend FrameWork
+- 💬 Sqlite – Local Database
+
+---
+
+## 📁 Project Structure
+

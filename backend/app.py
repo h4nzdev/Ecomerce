@@ -53,7 +53,7 @@ def db_init() :
     conn.commit()
     conn.close()
     
-GOOGLE_API_KEY = "Your Api Key Here!"
+GOOGLE_API_KEY = "Your api key"
 genai.configure(api_key=GOOGLE_API_KEY)
 
 # Create a Gemini chat model instance
